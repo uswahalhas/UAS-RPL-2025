@@ -3,50 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Booking List</title>
 </head>
 <body>
-<h1>Booking</h1>
-<div>
-    @if (session()->has('success'))
-        <div>
-        {{session('success')}}
-</div>
-    @endif
-</div>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Phone_Number</th>
-            <th>Email</th>
-            <th>Equipment</th>
-            <th>Booking_Date</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        <tr>
-        @foreach ($booking as $booking)
-        <tr>
-           <td>{{$booking->id}}</td>
-           <td>{{$booking->phone_number}}</td>
-           <td>{{$booking->email}}</td>
-           <td>{{$booking->equipment}}</td>
-           <td>{{$booking->booking_date}}</td>
-           <td>
-                <a href="{{route('booking.edit', ['booking' => $booking])}}">Edit</a>
-</td>
-            <td>
-                <form method="post" action="{{route('booking.destroy',['booking'=>$booking])}}">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" value="Delete" />
-                </form>
-            </td>
-        <tr>
-        @endforeach
-        <td>
-    
-</td>
-<table>
-<div>
+    <h1>Booking List</h1>
+
+    <!-- Tombol Create untuk menuju halaman booking.create -->
+    <a href="{{ route('booking.create') }}" style="padding: 10px; background-color: blue; color: white; text-decoration: none;">Create New Booking</a>
+
+    <table border="1" style="width: 100%; margin-top: 20px;">
+        <thead>
+            <tr>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Equipment</th>
+                <th>Booking Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($bookings as $booking)
+            <tr>
+                <td>{{ $booking->phone_number }}</td>
+                <td>{{ $booking->email }}</td>
+                <td>{{ $booking->equipment }}</td>
+                <td>{{ $booking->booking_date }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </body>
 </html>
